@@ -45,6 +45,7 @@ void RobotInit()
     __enable_irq();
 }
 
+
 void RobotTask()
 {
 #if defined(ONE_BOARD) || defined(GIMBAL_BOARD)

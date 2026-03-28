@@ -4,8 +4,8 @@
 #include "bsp_usart.h"
 #include "seasky_protocol.h"
 
-#define VISION_RECV_SIZE 18u // 当前为固定值,36字节
-#define VISION_SEND_SIZE 36u
+#define VISION_RECV_SIZE 16u // 当前为固定值,36字节
+#define VISION_SEND_SIZE 16u
 
 #pragma pack(1)
 typedef enum
@@ -35,14 +35,41 @@ typedef enum
 	BASE = 8
 } Target_Type_e;
 
+// typedef struct
+// {
+// 	Fire_Mode_e fire_mode;
+// 	// Target_State_e target_state;
+// 	// Target_Type_e target_type;
+
+// 	float pitch;
+// 	float yaw;
+// 	float distance;
+// } Vision_Recv_s;
+
+// typedef struct 
+// {
+// //   HeaderFrame frame_header;
+// //   uint32_t time_stamp;
+// 	struct 
+// 	{
+// 		struct
+// 		{
+// 			float vx;
+// 			float vy;
+// 			float wz;
+// 		} __attribute__((packed)) speed_vector;
+// 	} __attribute__((packed)) data;
+// Target_State_e  target_state;
+// } __attribute__((packed)) Vision_Recv_s;
+
 typedef struct
 {
-	Fire_Mode_e fire_mode;
 	Target_State_e target_state;
-	Target_Type_e target_type;
+	Fire_Mode_e fire_mode;
 
 	float pitch;
 	float yaw;
+	float distance;
 } Vision_Recv_s;
 
 typedef enum
@@ -71,13 +98,14 @@ typedef enum
 
 typedef struct
 {
-	Enemy_Color_e enemy_color;
-	Work_Mode_e work_mode;
-	Bullet_Speed_e bullet_speed;
+	// Enemy_Color_e enemy_color;
+	// Work_Mode_e work_mode;
+	// Bullet_Speed_e bullet_speed;
 
-	float yaw;
-	float pitch;
+	Work_Mode_e work_mode;
 	float roll;
+	float pitch;
+	float yaw;
 } Vision_Send_s;
 #pragma pack()
 

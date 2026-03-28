@@ -1,0 +1,660 @@
+ARM GAS  C:\Users\10542\AppData\Local\Temp\ccsoVK6q.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"hero_config.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "application/config/hero_robot/hero_config.c"
+  20              		.section	.text.HeroConfigInit,"ax",%progbits
+  21              		.align	1
+  22              		.global	HeroConfigInit
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	HeroConfigInit:
+  28              	.LFB271:
+   1:application/config/hero_robot/hero_config.c **** #include "hero_config.h"
+   2:application/config/hero_robot/hero_config.c **** 
+   3:application/config/hero_robot/hero_config.c **** Robot_Config_s *HeroConfigInit(void) 
+   4:application/config/hero_robot/hero_config.c **** {
+  29              		.loc 1 4 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+   5:application/config/hero_robot/hero_config.c ****     static Robot_Config_s hero_config =  {
+  34              		.loc 1 5 5 view .LVU1
+   6:application/config/hero_robot/hero_config.c ****         .chassis_param = {
+   7:application/config/hero_robot/hero_config.c ****             .chassis_motor_id[MOTOR_LF] = 1,    //1,4,3,2
+   8:application/config/hero_robot/hero_config.c ****             .chassis_motor_id[MOTOR_RF] = 2,
+   9:application/config/hero_robot/hero_config.c ****             .chassis_motor_id[MOTOR_RB] = 4,
+  10:application/config/hero_robot/hero_config.c ****             .chassis_motor_id[MOTOR_LB] = 3,
+  11:application/config/hero_robot/hero_config.c **** 
+  12:application/config/hero_robot/hero_config.c ****             .chassis_motor_id[MOTOR_UP_LF] = 1,   //左前舵轮
+  13:application/config/hero_robot/hero_config.c ****             .chassis_motor_id[MOTOR_UP_RF] = 2,
+  14:application/config/hero_robot/hero_config.c ****             .chassis_motor_id[MOTOR_UP_LB] = 3,
+  15:application/config/hero_robot/hero_config.c ****             .chassis_motor_id[MOTOR_UP_RB] = 4,        
+  16:application/config/hero_robot/hero_config.c ****             .wheel_type = STEER_WHEEL,
+  17:application/config/hero_robot/hero_config.c ****             .wheel_measure = {
+  18:application/config/hero_robot/hero_config.c ****                 .center_gimbal_offset_x = 0.0,
+  19:application/config/hero_robot/hero_config.c ****                 .center_gimbal_offset_y = 0.0,
+  20:application/config/hero_robot/hero_config.c ****                 .wheel_base = 406.46,
+  21:application/config/hero_robot/hero_config.c ****                 .track_width = 361.53,
+  22:application/config/hero_robot/hero_config.c ****                 .radius_wheel = 75,
+  23:application/config/hero_robot/hero_config.c ****                 .reduction_ratio_wheel = 19.0,
+  24:application/config/hero_robot/hero_config.c ****             },
+ARM GAS  C:\Users\10542\AppData\Local\Temp\ccsoVK6q.s 			page 2
+
+
+  25:application/config/hero_robot/hero_config.c ****             //轮向电机配置
+  26:application/config/hero_robot/hero_config.c ****             .chassis_motor_config = {
+  27:application/config/hero_robot/hero_config.c ****                 .can_init_config.can_handle = &hcan1,
+  28:application/config/hero_robot/hero_config.c ****                 .controller_param_init_config = {
+  29:application/config/hero_robot/hero_config.c ****                     .speed_PID = {
+  30:application/config/hero_robot/hero_config.c ****                         .Kp = 5.0,
+  31:application/config/hero_robot/hero_config.c ****                         .Ki = 1.0,
+  32:application/config/hero_robot/hero_config.c ****                         .Kd = 0.0, 
+  33:application/config/hero_robot/hero_config.c ****                         .IntegralLimit = 3000,
+  34:application/config/hero_robot/hero_config.c ****                         .Improve = PID_Trapezoid_Intergral | PID_Integral_Limit | PID_Derivative_On
+  35:application/config/hero_robot/hero_config.c ****                         .MaxOut = 12000,
+  36:application/config/hero_robot/hero_config.c ****                     },
+  37:application/config/hero_robot/hero_config.c ****                     .current_PID = {
+  38:application/config/hero_robot/hero_config.c ****                         .Kp = 0.5, 
+  39:application/config/hero_robot/hero_config.c ****                         .Ki = 0.0,   
+  40:application/config/hero_robot/hero_config.c ****                         .Kd = 0.0,
+  41:application/config/hero_robot/hero_config.c ****                         .IntegralLimit = 3000,
+  42:application/config/hero_robot/hero_config.c ****                         .Improve = PID_Trapezoid_Intergral | PID_Integral_Limit | PID_Derivative_On
+  43:application/config/hero_robot/hero_config.c ****                         .MaxOut = 15000,
+  44:application/config/hero_robot/hero_config.c ****                     },
+  45:application/config/hero_robot/hero_config.c ****                 },   
+  46:application/config/hero_robot/hero_config.c ****                 .controller_setting_init_config = {
+  47:application/config/hero_robot/hero_config.c ****                     .angle_feedback_source = MOTOR_FEED,
+  48:application/config/hero_robot/hero_config.c ****                     .speed_feedback_source = MOTOR_FEED,
+  49:application/config/hero_robot/hero_config.c ****                     .outer_loop_type = SPEED_LOOP,
+  50:application/config/hero_robot/hero_config.c ****                     .close_loop_type = CURRENT_LOOP | SPEED_LOOP,
+  51:application/config/hero_robot/hero_config.c ****                 },
+  52:application/config/hero_robot/hero_config.c ****                 .motor_type = M3508,             
+  53:application/config/hero_robot/hero_config.c ****             },
+  54:application/config/hero_robot/hero_config.c ****             //舵向电机配置
+  55:application/config/hero_robot/hero_config.c ****             .rudder_motor_config = {
+  56:application/config/hero_robot/hero_config.c ****                 .can_init_config.can_handle = &hcan1,
+  57:application/config/hero_robot/hero_config.c ****                 .controller_param_init_config = {
+  58:application/config/hero_robot/hero_config.c ****                     .speed_PID = {
+  59:application/config/hero_robot/hero_config.c ****                         .Kp = 10.0,
+  60:application/config/hero_robot/hero_config.c ****                         .Ki = 1.0,
+  61:application/config/hero_robot/hero_config.c ****                         .Kd = 0.0, 
+  62:application/config/hero_robot/hero_config.c ****                         .IntegralLimit = 3000,
+  63:application/config/hero_robot/hero_config.c ****                         .Improve = PID_Trapezoid_Intergral | PID_Integral_Limit | PID_Derivative_On
+  64:application/config/hero_robot/hero_config.c ****                         .MaxOut = 12000,
+  65:application/config/hero_robot/hero_config.c ****                     },
+  66:application/config/hero_robot/hero_config.c ****                     .angle_PID = {
+  67:application/config/hero_robot/hero_config.c ****                         .Kp = 0.5, 
+  68:application/config/hero_robot/hero_config.c ****                         .Ki = 0.0,   
+  69:application/config/hero_robot/hero_config.c ****                         .Kd = 0.0,
+  70:application/config/hero_robot/hero_config.c ****                         .IntegralLimit = 3000,
+  71:application/config/hero_robot/hero_config.c ****                         .Improve = PID_Trapezoid_Intergral | PID_Integral_Limit | PID_Derivative_On
+  72:application/config/hero_robot/hero_config.c ****                         .MaxOut = 15000,
+  73:application/config/hero_robot/hero_config.c ****                     },
+  74:application/config/hero_robot/hero_config.c ****                 },   
+  75:application/config/hero_robot/hero_config.c ****                 .controller_setting_init_config = {
+  76:application/config/hero_robot/hero_config.c ****                     .angle_feedback_source = MOTOR_FEED,
+  77:application/config/hero_robot/hero_config.c ****                     .speed_feedback_source = MOTOR_FEED,
+  78:application/config/hero_robot/hero_config.c ****                     .outer_loop_type = ANGLE_LOOP,
+  79:application/config/hero_robot/hero_config.c ****                     .close_loop_type = ANGLE_LOOP | SPEED_LOOP,
+  80:application/config/hero_robot/hero_config.c ****                 },
+  81:application/config/hero_robot/hero_config.c ****                 .motor_type = GM6020,             
+ARM GAS  C:\Users\10542\AppData\Local\Temp\ccsoVK6q.s 			page 3
+
+
+  82:application/config/hero_robot/hero_config.c ****             }
+  83:application/config/hero_robot/hero_config.c ****          },
+  84:application/config/hero_robot/hero_config.c ****         //云台配置
+  85:application/config/hero_robot/hero_config.c ****         .gimbal_param = {
+  86:application/config/hero_robot/hero_config.c ****             .gimbal_type = SINGLE_GIMBAL,
+  87:application/config/hero_robot/hero_config.c ****              .gimbal_offset = {
+  88:application/config/hero_robot/hero_config.c ****                     .yaw_offset = 2591,
+  89:application/config/hero_robot/hero_config.c ****                     .pitch_min_angle = -18.0f,
+  90:application/config/hero_robot/hero_config.c ****                     .pitch_max_angle = 35.0f,
+  91:application/config/hero_robot/hero_config.c ****                 },
+  92:application/config/hero_robot/hero_config.c ****             //yaw轴也走can1，id5避免和舵向冲突
+  93:application/config/hero_robot/hero_config.c ****             .yaw_motor_config = {
+  94:application/config/hero_robot/hero_config.c ****                 .can_init_config = {
+  95:application/config/hero_robot/hero_config.c ****                     .can_handle = &hcan1,
+  96:application/config/hero_robot/hero_config.c ****                     .tx_id = 5,
+  97:application/config/hero_robot/hero_config.c ****                 },
+  98:application/config/hero_robot/hero_config.c ****                 .controller_param_init_config = {
+  99:application/config/hero_robot/hero_config.c ****                     .angle_PID = {
+ 100:application/config/hero_robot/hero_config.c ****                         .Kp = 10.0,
+ 101:application/config/hero_robot/hero_config.c ****                         .Ki = 0.0, 
+ 102:application/config/hero_robot/hero_config.c ****                         .Kd = 0.5, 
+ 103:application/config/hero_robot/hero_config.c ****                         .DeadBand = 0.1,
+ 104:application/config/hero_robot/hero_config.c ****                         .Improve = PID_Trapezoid_Intergral | PID_Integral_Limit | PID_Derivative_On
+ 105:application/config/hero_robot/hero_config.c ****                         .IntegralLimit = 100,
+ 106:application/config/hero_robot/hero_config.c ****                         .MaxOut = 500,
+ 107:application/config/hero_robot/hero_config.c ****                     },
+ 108:application/config/hero_robot/hero_config.c ****                     .speed_PID = {
+ 109:application/config/hero_robot/hero_config.c ****                         .Kp = 200.0, 
+ 110:application/config/hero_robot/hero_config.c ****                         .Ki = 150.0, 
+ 111:application/config/hero_robot/hero_config.c ****                         .Kd = 0.0,
+ 112:application/config/hero_robot/hero_config.c ****                         .Improve = PID_Trapezoid_Intergral | PID_Integral_Limit | PID_Derivative_On
+ 113:application/config/hero_robot/hero_config.c ****                         .IntegralLimit = 3000,
+ 114:application/config/hero_robot/hero_config.c ****                         .MaxOut = 20000,
+ 115:application/config/hero_robot/hero_config.c ****                     },
+ 116:application/config/hero_robot/hero_config.c ****                 },
+ 117:application/config/hero_robot/hero_config.c ****                 .controller_setting_init_config = {
+ 118:application/config/hero_robot/hero_config.c ****                     .angle_feedback_source = OTHER_FEED,
+ 119:application/config/hero_robot/hero_config.c ****                     .speed_feedback_source = OTHER_FEED,
+ 120:application/config/hero_robot/hero_config.c ****                     .outer_loop_type = ANGLE_LOOP,
+ 121:application/config/hero_robot/hero_config.c ****                     .close_loop_type = ANGLE_LOOP | SPEED_LOOP,
+ 122:application/config/hero_robot/hero_config.c ****                     .motor_reverse_flag = MOTOR_DIRECTION_REVERSE,
+ 123:application/config/hero_robot/hero_config.c ****                     .feedback_reverse_flag = FEEDBACK_DIRECTION_NORMAL,
+ 124:application/config/hero_robot/hero_config.c ****                 },
+ 125:application/config/hero_robot/hero_config.c ****                 .motor_type = GM6020
+ 126:application/config/hero_robot/hero_config.c ****             },        
+ 127:application/config/hero_robot/hero_config.c ****             //拨弹上面电机走can2
+ 128:application/config/hero_robot/hero_config.c ****             .pitch_motor_config = {
+ 129:application/config/hero_robot/hero_config.c ****                 .can_init_config = {
+ 130:application/config/hero_robot/hero_config.c ****                     .can_handle = &hcan2,
+ 131:application/config/hero_robot/hero_config.c ****                     .tx_id = 0x7f,
+ 132:application/config/hero_robot/hero_config.c ****                     .ext_id = 0x7f,
+ 133:application/config/hero_robot/hero_config.c ****                 },
+ 134:application/config/hero_robot/hero_config.c ****                 .controller_param_init_config = {
+ 135:application/config/hero_robot/hero_config.c ****                     .angle_PID = {
+ 136:application/config/hero_robot/hero_config.c ****                         .Kp = 10, // 10
+ 137:application/config/hero_robot/hero_config.c ****                         .Ki = 1,
+ 138:application/config/hero_robot/hero_config.c ****                         .Kd = 0.5,
+ARM GAS  C:\Users\10542\AppData\Local\Temp\ccsoVK6q.s 			page 4
+
+
+ 139:application/config/hero_robot/hero_config.c ****                         .Improve = PID_Trapezoid_Intergral | PID_Integral_Limit | PID_Derivative_On
+ 140:application/config/hero_robot/hero_config.c ****                         .IntegralLimit = 100,
+ 141:application/config/hero_robot/hero_config.c ****                         .MaxOut = 20,
+ 142:application/config/hero_robot/hero_config.c ****                     },
+ 143:application/config/hero_robot/hero_config.c ****                     .speed_PID = {
+ 144:application/config/hero_robot/hero_config.c ****                         .Kp = 0.05,  // 50
+ 145:application/config/hero_robot/hero_config.c ****                         .Ki = 0, // 350
+ 146:application/config/hero_robot/hero_config.c ****                         .Kd = 0.003,   // 0
+ 147:application/config/hero_robot/hero_config.c ****                         .Improve = PID_Trapezoid_Intergral | PID_Integral_Limit | PID_Derivative_On
+ 148:application/config/hero_robot/hero_config.c ****                         .IntegralLimit = 2500,
+ 149:application/config/hero_robot/hero_config.c ****                         .MaxOut = 30,
+ 150:application/config/hero_robot/hero_config.c ****                     },
+ 151:application/config/hero_robot/hero_config.c ****                 },
+ 152:application/config/hero_robot/hero_config.c ****                 .controller_setting_init_config = {
+ 153:application/config/hero_robot/hero_config.c ****                     .angle_feedback_source = OTHER_FEED,
+ 154:application/config/hero_robot/hero_config.c ****                     .speed_feedback_source = OTHER_FEED,
+ 155:application/config/hero_robot/hero_config.c ****                     .outer_loop_type = ANGLE_LOOP,
+ 156:application/config/hero_robot/hero_config.c ****                     .close_loop_type = ANGLE_LOOP | SPEED_LOOP,
+ 157:application/config/hero_robot/hero_config.c ****                     .motor_reverse_flag = MOTOR_DIRECTION_REVERSE,
+ 158:application/config/hero_robot/hero_config.c ****                     .feedback_reverse_flag = FEEDBACK_DIRECTION_NORMAL,
+ 159:application/config/hero_robot/hero_config.c ****                 },
+ 160:application/config/hero_robot/hero_config.c ****                 .motor_type = XMCY
+ 161:application/config/hero_robot/hero_config.c ****             }                
+ 162:application/config/hero_robot/hero_config.c ****         },
+ 163:application/config/hero_robot/hero_config.c **** 
+ 164:application/config/hero_robot/hero_config.c ****         .shoot_param = {
+ 165:application/config/hero_robot/hero_config.c ****             //英雄双发射机构
+ 166:application/config/hero_robot/hero_config.c ****             .friction_motor_id[MOTOR_LF] = 3,
+ 167:application/config/hero_robot/hero_config.c ****             .friction_motor_id[MOTOR_RF] = 5,
+ 168:application/config/hero_robot/hero_config.c ****             // .friction_motor_id[MOTOR_LB] = 1,
+ 169:application/config/hero_robot/hero_config.c ****             // .friction_motor_id[MOTOR_RB] = 4,
+ 170:application/config/hero_robot/hero_config.c **** 
+ 171:application/config/hero_robot/hero_config.c ****             .shoot_type = DUAL_SHOOT,
+ 172:application/config/hero_robot/hero_config.c ****             .friction_motor_config = {
+ 173:application/config/hero_robot/hero_config.c ****                 .can_init_config = {
+ 174:application/config/hero_robot/hero_config.c ****                     .can_handle = &hcan2,
+ 175:application/config/hero_robot/hero_config.c ****                 },
+ 176:application/config/hero_robot/hero_config.c ****                 .controller_param_init_config = {
+ 177:application/config/hero_robot/hero_config.c ****                     .speed_PID = {
+ 178:application/config/hero_robot/hero_config.c ****                         .Kp = 15.0, 
+ 179:application/config/hero_robot/hero_config.c ****                         .Ki = 1.0, 
+ 180:application/config/hero_robot/hero_config.c ****                         .Kd = 0.0,
+ 181:application/config/hero_robot/hero_config.c ****                         .Improve = PID_Integral_Limit,
+ 182:application/config/hero_robot/hero_config.c ****                         .IntegralLimit = 10000,
+ 183:application/config/hero_robot/hero_config.c ****                         .MaxOut = 15000,
+ 184:application/config/hero_robot/hero_config.c ****                     },
+ 185:application/config/hero_robot/hero_config.c ****                     .current_PID = {
+ 186:application/config/hero_robot/hero_config.c ****                         .Kp = 0.4, 
+ 187:application/config/hero_robot/hero_config.c ****                         .Ki = 0.0, 
+ 188:application/config/hero_robot/hero_config.c ****                         .Kd = 0.0,
+ 189:application/config/hero_robot/hero_config.c ****                         .Improve = PID_Integral_Limit,
+ 190:application/config/hero_robot/hero_config.c ****                         .IntegralLimit = 10000,
+ 191:application/config/hero_robot/hero_config.c ****                         .MaxOut = 15000,
+ 192:application/config/hero_robot/hero_config.c ****                     },
+ 193:application/config/hero_robot/hero_config.c ****                 },
+ 194:application/config/hero_robot/hero_config.c ****                 .controller_setting_init_config = {
+ 195:application/config/hero_robot/hero_config.c ****                     .angle_feedback_source = MOTOR_FEED,
+ARM GAS  C:\Users\10542\AppData\Local\Temp\ccsoVK6q.s 			page 5
+
+
+ 196:application/config/hero_robot/hero_config.c ****                     .speed_feedback_source = MOTOR_FEED,
+ 197:application/config/hero_robot/hero_config.c ****                     .outer_loop_type = SPEED_LOOP,
+ 198:application/config/hero_robot/hero_config.c ****                     .close_loop_type = SPEED_LOOP | CURRENT_LOOP,
+ 199:application/config/hero_robot/hero_config.c ****                     .motor_reverse_flag = MOTOR_DIRECTION_REVERSE,
+ 200:application/config/hero_robot/hero_config.c ****                 },
+ 201:application/config/hero_robot/hero_config.c ****                 .motor_type = M3508
+ 202:application/config/hero_robot/hero_config.c ****             },
+ 203:application/config/hero_robot/hero_config.c **** 
+ 204:application/config/hero_robot/hero_config.c ****             .loader_motor_config = {
+ 205:application/config/hero_robot/hero_config.c ****                 .can_init_config = {
+ 206:application/config/hero_robot/hero_config.c ****                     .can_handle = &hcan2,
+ 207:application/config/hero_robot/hero_config.c ****                     .tx_id = 6,
+ 208:application/config/hero_robot/hero_config.c ****                 },
+ 209:application/config/hero_robot/hero_config.c ****                 .controller_param_init_config = {
+ 210:application/config/hero_robot/hero_config.c ****                     .angle_PID = {
+ 211:application/config/hero_robot/hero_config.c ****                         // 如果启用位置环来控制发弹,需要较大的I值保证输出力�
+ 212:application/config/hero_robot/hero_config.c ****                         .Kp = 10.0, 
+ 213:application/config/hero_robot/hero_config.c ****                         .Ki = 1.0,
+ 214:application/config/hero_robot/hero_config.c ****                         .Kd = 0.0,
+ 215:application/config/hero_robot/hero_config.c ****                         .MaxOut = 200, 
+ 216:application/config/hero_robot/hero_config.c ****                     },
+ 217:application/config/hero_robot/hero_config.c ****                     .speed_PID = {
+ 218:application/config/hero_robot/hero_config.c ****                         .Kp = 10.0, 
+ 219:application/config/hero_robot/hero_config.c ****                         .Ki = 1.0, 
+ 220:application/config/hero_robot/hero_config.c ****                         .Kd = 0.0,
+ 221:application/config/hero_robot/hero_config.c ****                         .Improve = PID_Integral_Limit,
+ 222:application/config/hero_robot/hero_config.c ****                         .IntegralLimit = 8000,
+ 223:application/config/hero_robot/hero_config.c ****                         .MaxOut = 10000,
+ 224:application/config/hero_robot/hero_config.c ****                     },
+ 225:application/config/hero_robot/hero_config.c ****                     .current_PID = {
+ 226:application/config/hero_robot/hero_config.c ****                         .Kp = 0.4, 
+ 227:application/config/hero_robot/hero_config.c ****                         .Ki = 0.0, 
+ 228:application/config/hero_robot/hero_config.c ****                         .Kd = 0.0,
+ 229:application/config/hero_robot/hero_config.c ****                         .Improve = PID_Integral_Limit,
+ 230:application/config/hero_robot/hero_config.c ****                         .IntegralLimit = 5000,
+ 231:application/config/hero_robot/hero_config.c ****                         .MaxOut = 5000,
+ 232:application/config/hero_robot/hero_config.c ****                     },
+ 233:application/config/hero_robot/hero_config.c ****                 },
+ 234:application/config/hero_robot/hero_config.c ****                 .controller_setting_init_config = {
+ 235:application/config/hero_robot/hero_config.c ****                     .angle_feedback_source = MOTOR_FEED, 
+ 236:application/config/hero_robot/hero_config.c ****                     .speed_feedback_source = MOTOR_FEED,
+ 237:application/config/hero_robot/hero_config.c ****                     .outer_loop_type = SPEED_LOOP, // 初始化成SPEED_LOOP,让拨盘停在原地,
+ 238:application/config/hero_robot/hero_config.c ****                     .close_loop_type = CURRENT_LOOP | SPEED_LOOP,
+ 239:application/config/hero_robot/hero_config.c ****                     .motor_reverse_flag = MOTOR_DIRECTION_NORMAL,
+ 240:application/config/hero_robot/hero_config.c ****                 },
+ 241:application/config/hero_robot/hero_config.c ****                 .motor_type = M3508 // 英雄使用M3508
+ 242:application/config/hero_robot/hero_config.c ****             }
+ 243:application/config/hero_robot/hero_config.c ****         }
+ 244:application/config/hero_robot/hero_config.c ****     };
+ 245:application/config/hero_robot/hero_config.c **** 
+ 246:application/config/hero_robot/hero_config.c ****     return &hero_config;
+  35              		.loc 1 246 5 view .LVU2
+ 247:application/config/hero_robot/hero_config.c **** } 
+  36              		.loc 1 247 1 is_stmt 0 view .LVU3
+  37 0000 0048     		ldr	r0, .L2
+  38 0002 7047     		bx	lr
+  39              	.L3:
+ARM GAS  C:\Users\10542\AppData\Local\Temp\ccsoVK6q.s 			page 6
+
+
+  40              		.align	2
+  41              	.L2:
+  42 0004 00000000 		.word	hero_config.0
+  43              		.cfi_endproc
+  44              	.LFE271:
+  46              		.section	.data.hero_config.0,"aw"
+  47              		.align	2
+  50              	hero_config.0:
+  51 0000 02       		.byte	2
+  52 0001 000000   		.space	3
+  53 0004 00000000 		.word	0
+  54 0008 00000000 		.word	0
+  55 000c E13ACB43 		.word	1137392353
+  56 0010 D7C3B443 		.word	1135920087
+  57 0014 00009642 		.word	1117126656
+  58 0018 00009841 		.word	1100480512
+  59 001c 00000000 		.space	60
+  59      00000000 
+  59      00000000 
+  59      00000000 
+  59      00000000 
+  60 0058 00002041 		.word	1092616192
+  61 005c 0000803F 		.word	1065353216
+  62 0060 00000000 		.word	0
+  63 0064 00803B46 		.word	1178304512
+  64 0068 00000000 		.space	4
+  65 006c 07       		.byte	7
+  66 006d 000000   		.space	3
+  67 0070 00803B45 		.word	1161527296
+  68 0074 00000000 		.space	16
+  68      00000000 
+  68      00000000 
+  68      00000000 
+  69 0084 0000003F 		.word	1056964608
+  70 0088 00000000 		.word	0
+  71 008c 00000000 		.word	0
+  72 0090 00606A46 		.word	1181376512
+  73 0094 00000000 		.space	4
+  74 0098 07       		.byte	7
+  75 0099 000000   		.space	3
+  76 009c 00803B45 		.word	1161527296
+  77 00a0 00000000 		.space	16
+  77      00000000 
+  77      00000000 
+  77      00000000 
+  78 00b0 04       		.byte	4
+  79 00b1 06       		.byte	6
+  80 00b2 0000     		.space	2
+  81 00b4 00       		.byte	0
+  82 00b5 00       		.byte	0
+  83 00b6 0000     		.space	2
+  84 00b8 01       		.byte	1
+  85 00b9 000000   		.space	3
+  86 00bc 00000000 		.word	hcan1
+  87 00c0 00000000 		.space	24
+  87      00000000 
+  87      00000000 
+ARM GAS  C:\Users\10542\AppData\Local\Temp\ccsoVK6q.s 			page 7
+
+
+  87      00000000 
+  87      00000000 
+  88 00d8 00000000 		.space	16
+  88      00000000 
+  88      00000000 
+  88      00000000 
+  89 00e8 0000003F 		.word	1056964608
+  90 00ec 00000000 		.word	0
+  91 00f0 00000000 		.word	0
+  92 00f4 00606A46 		.word	1181376512
+  93 00f8 00000000 		.space	4
+  94 00fc 07       		.byte	7
+  95 00fd 000000   		.space	3
+  96 0100 00803B45 		.word	1161527296
+  97 0104 00000000 		.space	16
+  97      00000000 
+  97      00000000 
+  97      00000000 
+  98 0114 0000A040 		.word	1084227584
+  99 0118 0000803F 		.word	1065353216
+ 100 011c 00000000 		.word	0
+ 101 0120 00803B46 		.word	1178304512
+ 102 0124 00000000 		.space	4
+ 103 0128 07       		.byte	7
+ 104 0129 000000   		.space	3
+ 105 012c 00803B45 		.word	1161527296
+ 106 0130 00000000 		.space	16
+ 106      00000000 
+ 106      00000000 
+ 106      00000000 
+ 107 0140 00000000 		.space	44
+ 107      00000000 
+ 107      00000000 
+ 107      00000000 
+ 107      00000000 
+ 108 016c 02       		.byte	2
+ 109 016d 03       		.byte	3
+ 110 016e 0000     		.space	2
+ 111 0170 00       		.byte	0
+ 112 0171 00       		.byte	0
+ 113 0172 0000     		.space	2
+ 114 0174 02       		.byte	2
+ 115 0175 000000   		.space	3
+ 116 0178 00000000 		.word	hcan1
+ 117 017c 00000000 		.space	24
+ 117      00000000 
+ 117      00000000 
+ 117      00000000 
+ 117      00000000 
+ 118 0194 00       		.space	1
+ 119 0195 01020403 		.ascii	"\001\002\004\003\001\002\003\004"
+ 119      01020304 
+ 120 019d 000000   		.space	3
+ 121 01a0 00       		.byte	0
+ 122 01a1 000000   		.space	3
+ 123 01a4 00F02145 		.word	1159852032
+ 124 01a8 00000C42 		.word	1108082688
+ARM GAS  C:\Users\10542\AppData\Local\Temp\ccsoVK6q.s 			page 8
+
+
+ 125 01ac 000090C1 		.word	-1047527424
+ 126 01b0 00000000 		.space	60
+ 126      00000000 
+ 126      00000000 
+ 126      00000000 
+ 126      00000000 
+ 127 01ec 00004843 		.word	1128792064
+ 128 01f0 00001643 		.word	1125515264
+ 129 01f4 00000000 		.word	0
+ 130 01f8 00409C46 		.word	1184645120
+ 131 01fc 00000000 		.space	4
+ 132 0200 07       		.byte	7
+ 133 0201 000000   		.space	3
+ 134 0204 00803B45 		.word	1161527296
+ 135 0208 00000000 		.space	16
+ 135      00000000 
+ 135      00000000 
+ 135      00000000 
+ 136 0218 00002041 		.word	1092616192
+ 137 021c 00000000 		.word	0
+ 138 0220 0000003F 		.word	1056964608
+ 139 0224 0000FA43 		.word	1140457472
+ 140 0228 CDCCCC3D 		.word	1036831949
+ 141 022c 07       		.byte	7
+ 142 022d 000000   		.space	3
+ 143 0230 0000C842 		.word	1120403456
+ 144 0234 00000000 		.space	16
+ 144      00000000 
+ 144      00000000 
+ 144      00000000 
+ 145 0244 04       		.byte	4
+ 146 0245 06       		.byte	6
+ 147 0246 01       		.byte	1
+ 148 0247 00       		.byte	0
+ 149 0248 01       		.byte	1
+ 150 0249 01       		.byte	1
+ 151 024a 0000     		.space	2
+ 152 024c 01       		.byte	1
+ 153 024d 000000   		.space	3
+ 154 0250 00000000 		.word	hcan1
+ 155 0254 05000000 		.word	5
+ 156 0258 00000000 		.space	20
+ 156      00000000 
+ 156      00000000 
+ 156      00000000 
+ 156      00000000 
+ 157 026c 00000000 		.space	188
+ 157      00000000 
+ 157      00000000 
+ 157      00000000 
+ 157      00000000 
+ 158 0328 00000000 		.space	60
+ 158      00000000 
+ 158      00000000 
+ 158      00000000 
+ 158      00000000 
+ 159 0364 CDCC4C3D 		.word	1028443341
+ARM GAS  C:\Users\10542\AppData\Local\Temp\ccsoVK6q.s 			page 9
+
+
+ 160 0368 00000000 		.word	0
+ 161 036c A69B443B 		.word	994352038
+ 162 0370 0000F041 		.word	1106247680
+ 163 0374 00000000 		.space	4
+ 164 0378 07       		.byte	7
+ 165 0379 000000   		.space	3
+ 166 037c 00401C45 		.word	1159479296
+ 167 0380 00000000 		.space	16
+ 167      00000000 
+ 167      00000000 
+ 167      00000000 
+ 168 0390 00002041 		.word	1092616192
+ 169 0394 0000803F 		.word	1065353216
+ 170 0398 0000003F 		.word	1056964608
+ 171 039c 0000A041 		.word	1101004800
+ 172 03a0 00000000 		.space	4
+ 173 03a4 07       		.byte	7
+ 174 03a5 000000   		.space	3
+ 175 03a8 0000C842 		.word	1120403456
+ 176 03ac 00000000 		.space	16
+ 176      00000000 
+ 176      00000000 
+ 176      00000000 
+ 177 03bc 04       		.byte	4
+ 178 03bd 06       		.byte	6
+ 179 03be 01       		.byte	1
+ 180 03bf 00       		.byte	0
+ 181 03c0 01       		.byte	1
+ 182 03c1 01       		.byte	1
+ 183 03c2 0000     		.space	2
+ 184 03c4 07       		.byte	7
+ 185 03c5 000000   		.space	3
+ 186 03c8 00000000 		.word	hcan2
+ 187 03cc 7F000000 		.word	127
+ 188 03d0 00000000 		.space	4
+ 189 03d4 7F000000 		.word	127
+ 190 03d8 00000000 		.space	12
+ 190      00000000 
+ 190      00000000 
+ 191 03e4 00       		.byte	0
+ 192 03e5 000000   		.space	3
+ 193 03e8 00000000 		.space	16
+ 193      00000000 
+ 193      00000000 
+ 193      00000000 
+ 194 03f8 CDCCCC3E 		.word	1053609165
+ 195 03fc 00000000 		.word	0
+ 196 0400 00000000 		.word	0
+ 197 0404 00606A46 		.word	1181376512
+ 198 0408 00000000 		.space	4
+ 199 040c 01       		.byte	1
+ 200 040d 000000   		.space	3
+ 201 0410 00401C46 		.word	1176256512
+ 202 0414 00000000 		.space	16
+ 202      00000000 
+ 202      00000000 
+ 202      00000000 
+ARM GAS  C:\Users\10542\AppData\Local\Temp\ccsoVK6q.s 			page 10
+
+
+ 203 0424 00007041 		.word	1097859072
+ 204 0428 0000803F 		.word	1065353216
+ 205 042c 00000000 		.word	0
+ 206 0430 00606A46 		.word	1181376512
+ 207 0434 00000000 		.space	4
+ 208 0438 01       		.byte	1
+ 209 0439 000000   		.space	3
+ 210 043c 00401C46 		.word	1176256512
+ 211 0440 00000000 		.space	16
+ 211      00000000 
+ 211      00000000 
+ 211      00000000 
+ 212 0450 00000000 		.space	44
+ 212      00000000 
+ 212      00000000 
+ 212      00000000 
+ 212      00000000 
+ 213 047c 02       		.byte	2
+ 214 047d 03       		.byte	3
+ 215 047e 01       		.byte	1
+ 216 047f 00       		.space	1
+ 217 0480 00       		.byte	0
+ 218 0481 00       		.byte	0
+ 219 0482 0000     		.space	2
+ 220 0484 02       		.byte	2
+ 221 0485 000000   		.space	3
+ 222 0488 00000000 		.word	hcan2
+ 223 048c 00000000 		.space	24
+ 223      00000000 
+ 223      00000000 
+ 223      00000000 
+ 223      00000000 
+ 224 04a4 00000000 		.space	16
+ 224      00000000 
+ 224      00000000 
+ 224      00000000 
+ 225 04b4 CDCCCC3E 		.word	1053609165
+ 226 04b8 00000000 		.word	0
+ 227 04bc 00000000 		.word	0
+ 228 04c0 00409C45 		.word	1167867904
+ 229 04c4 00000000 		.space	4
+ 230 04c8 01       		.byte	1
+ 231 04c9 000000   		.space	3
+ 232 04cc 00409C45 		.word	1167867904
+ 233 04d0 00000000 		.space	16
+ 233      00000000 
+ 233      00000000 
+ 233      00000000 
+ 234 04e0 00002041 		.word	1092616192
+ 235 04e4 0000803F 		.word	1065353216
+ 236 04e8 00000000 		.word	0
+ 237 04ec 00401C46 		.word	1176256512
+ 238 04f0 00000000 		.space	4
+ 239 04f4 01       		.byte	1
+ 240 04f5 000000   		.space	3
+ 241 04f8 0000FA45 		.word	1174011904
+ 242 04fc 00000000 		.space	16
+ARM GAS  C:\Users\10542\AppData\Local\Temp\ccsoVK6q.s 			page 11
+
+
+ 242      00000000 
+ 242      00000000 
+ 242      00000000 
+ 243 050c 00002041 		.word	1092616192
+ 244 0510 0000803F 		.word	1065353216
+ 245 0514 00000000 		.word	0
+ 246 0518 00004843 		.word	1128792064
+ 247 051c 00000000 		.space	28
+ 247      00000000 
+ 247      00000000 
+ 247      00000000 
+ 247      00000000 
+ 248 0538 02       		.byte	2
+ 249 0539 03       		.byte	3
+ 250 053a 00       		.byte	0
+ 251 053b 00       		.space	1
+ 252 053c 00       		.byte	0
+ 253 053d 00       		.byte	0
+ 254 053e 0000     		.space	2
+ 255 0540 02       		.byte	2
+ 256 0541 000000   		.space	3
+ 257 0544 00000000 		.word	hcan2
+ 258 0548 06000000 		.word	6
+ 259 054c 00000000 		.space	20
+ 259      00000000 
+ 259      00000000 
+ 259      00000000 
+ 259      00000000 
+ 260 0560 030500   		.ascii	"\003\005\000"
+ 261 0563 00       		.space	1
+ 262 0564 00000000 		.space	4
+ 263              		.text
+ 264              	.Letext0:
+ 265              		.file 2 "E:/MSYS2/mingw64/arm-none-eabi/include/machine/_default_types.h"
+ 266              		.file 3 "E:/MSYS2/mingw64/arm-none-eabi/include/sys/_stdint.h"
+ 267              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h"
+ 268              		.file 5 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h"
+ 269              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h"
+ 270              		.file 7 "Inc/can.h"
+ 271              		.file 8 "bsp/can/bsp_can.h"
+ 272              		.file 9 "modules/algorithm/controller.h"
+ 273              		.file 10 "modules/motor/motor_def.h"
+ 274              		.file 11 "application/config/config.h"
+ARM GAS  C:\Users\10542\AppData\Local\Temp\ccsoVK6q.s 			page 12
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 hero_config.c
+C:\Users\10542\AppData\Local\Temp\ccsoVK6q.s:21     .text.HeroConfigInit:00000000 $t
+C:\Users\10542\AppData\Local\Temp\ccsoVK6q.s:27     .text.HeroConfigInit:00000000 HeroConfigInit
+C:\Users\10542\AppData\Local\Temp\ccsoVK6q.s:42     .text.HeroConfigInit:00000004 $d
+C:\Users\10542\AppData\Local\Temp\ccsoVK6q.s:50     .data.hero_config.0:00000000 hero_config.0
+C:\Users\10542\AppData\Local\Temp\ccsoVK6q.s:47     .data.hero_config.0:00000000 $d
+
+UNDEFINED SYMBOLS
+hcan1
+hcan2

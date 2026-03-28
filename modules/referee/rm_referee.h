@@ -54,12 +54,14 @@ typedef struct
 	uint32_t lid_flag : 1;
 	uint32_t friction_flag : 1;
 	uint32_t Power_flag : 1;
+	uint8_t refresh_flag : 2;
 } Referee_Interactive_Flag_t;
 
 // 此结构体包含UI绘制与机器人车间通信的需要的其他非裁判系统数据
 typedef struct
 {
 	Referee_Interactive_Flag_t Referee_Interactive_Flag;
+
 	// 为UI绘制以及交互数据所用
 	chassis_mode_e chassis_mode;			 // 底盘模式
 	gimbal_mode_e gimbal_mode;				 // 云台模式
