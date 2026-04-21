@@ -59,7 +59,7 @@ LEDInstance *led_alarm;
 
 void RobotCMDInit()
 {
-    robot_config = RobotConfigInit(INFANTRY_ROBOT_3);
+    robot_config = RobotConfigInit(HERO_ROBOT);
 
     Buzzer_config_s buzzer_config ={
             .alarm_level = ALARM_LEVEL_HIGH, //设置警报等级 同一状态下 高等级的响应
@@ -233,8 +233,8 @@ static void RemoteControlSet()
 #endif
 
     // 云台陀螺仪模式,并且视觉未识别到目标,纯遥控器拨杆控制
-    add_yaw = 0.0020f * (float)rc_data[TEMP].rc.rocker_l_;
-    add_pitch = 0.0005f * (float)rc_data[TEMP].rc.rocker_l1;
+    add_yaw = 0.002f   * (float)rc_data[TEMP].rc.rocker_l_;
+    add_pitch = 0.002f * (float)rc_data[TEMP].rc.rocker_l1;
 
     // if (robot_state == ROBOT_READY)
     // { 
@@ -646,10 +646,13 @@ void RobotCMDTask()
     else
         chassis_cmd_send.power_limit = referee_data->GameRobotState.chassis_power_limit;
 
-    if (referee_data->GameState.stage_remain_time > 250)
-        chassis_cmd_send.chassis_mode = CHASSIS_NO_FOLLOW;
-    else
-        chassis_cmd_send.chassis_mode = CHASSIS_ROTATE;
+    // if (referee_data->GameState.stage_remain_time > 250)
+    //     chassis_cmd_send.chassis_mode = CHASSIS_NO_FOLLOW;
+    // else
+    //     chassis_cmd_send.chassis_mode = CHASSIS_ROTATE;
+    
+    if(referee_data->GameState.stage_remain_time == 300)
+    UITaskInit(&huart6,&ui_data);
 
     // 获取裁判系统数据
     // 我方颜色id小于7是红色,大于7是蓝色,注意这里发送的是对方的颜色, 0:blue, 1:red

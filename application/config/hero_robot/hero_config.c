@@ -5,14 +5,14 @@ Robot_Config_s *HeroConfigInit(void)
     static Robot_Config_s hero_config =  {
         .chassis_param = {
             .chassis_motor_id[MOTOR_LF] = 1,    //1,4,3,2
-            .chassis_motor_id[MOTOR_RF] = 2,
-            .chassis_motor_id[MOTOR_RB] = 4,
-            .chassis_motor_id[MOTOR_LB] = 3,
+            .chassis_motor_id[MOTOR_RF] = 4,
+            .chassis_motor_id[MOTOR_RB] = 3,
+            .chassis_motor_id[MOTOR_LB] = 2,
 
-            .chassis_motor_id[MOTOR_UP_LF] = 1,   //左前舵轮
-            .chassis_motor_id[MOTOR_UP_RF] = 2,
-            .chassis_motor_id[MOTOR_UP_LB] = 3,
-            .chassis_motor_id[MOTOR_UP_RB] = 4,        
+            .chassis_motor_id[MOTOR_UP_LF] = 6,   //左前舵轮
+            .chassis_motor_id[MOTOR_UP_RF] = 4,
+            .chassis_motor_id[MOTOR_UP_LB] = 1,
+            .chassis_motor_id[MOTOR_UP_RB] = 3,        
             .wheel_type = STEER_WHEEL,
             .wheel_measure = {
                 .center_gimbal_offset_x = 0.0,
@@ -64,9 +64,9 @@ Robot_Config_s *HeroConfigInit(void)
                         .MaxOut = 12000,
                     },
                     .angle_PID = {
-                        .Kp = 0.5, 
-                        .Ki = 0.0,   
-                        .Kd = 0.0,
+                        .Kp = 45.0, 
+                        .Ki = 5.0,   
+                        .Kd = 0.2,
                         .IntegralLimit = 3000,
                         .Improve = PID_Trapezoid_Intergral | PID_Integral_Limit | PID_Derivative_On_Measurement,
                         .MaxOut = 15000,
@@ -85,15 +85,15 @@ Robot_Config_s *HeroConfigInit(void)
         .gimbal_param = {
             .gimbal_type = SINGLE_GIMBAL,
              .gimbal_offset = {
-                    .yaw_offset = 2591,
+                    .yaw_offset = 2777,
                     .pitch_min_angle = -18.0f,
-                    .pitch_max_angle = 35.0f,
+                    .pitch_max_angle = 20.0f,
                 },
             //yaw轴也走can1，id5避免和舵向冲突
             .yaw_motor_config = {
                 .can_init_config = {
-                    .can_handle = &hcan1,
-                    .tx_id = 5,
+                    .can_handle = &hcan2,
+                    .tx_id = 2,
                 },
                 .controller_param_init_config = {
                     .angle_PID = {
@@ -119,8 +119,8 @@ Robot_Config_s *HeroConfigInit(void)
                     .speed_feedback_source = OTHER_FEED,
                     .outer_loop_type = ANGLE_LOOP,
                     .close_loop_type = ANGLE_LOOP | SPEED_LOOP,
-                    .motor_reverse_flag = MOTOR_DIRECTION_REVERSE,
-                    .feedback_reverse_flag = FEEDBACK_DIRECTION_NORMAL,
+                    .motor_reverse_flag = MOTOR_DIRECTION_NORMAL,
+                    .feedback_reverse_flag = FEEDBACK_DIRECTION_REVERSE,
                 },
                 .motor_type = GM6020
             },        
@@ -133,20 +133,20 @@ Robot_Config_s *HeroConfigInit(void)
                 },
                 .controller_param_init_config = {
                     .angle_PID = {
-                        .Kp = 10, // 10
-                        .Ki = 1,
-                        .Kd = 0.5,
+                        .Kp = 0.8, // 10
+                        .Ki = 0,
+                        .Kd = 0,
                         .Improve = PID_Trapezoid_Intergral | PID_Integral_Limit | PID_Derivative_On_Measurement,
                         .IntegralLimit = 100,
                         .MaxOut = 20,
                     },
                     .speed_PID = {
-                        .Kp = 0.05,  // 50
+                        .Kp = 0.2,  // 50
                         .Ki = 0, // 350
-                        .Kd = 0.003,   // 0
+                        .Kd = 0,   // 0
                         .Improve = PID_Trapezoid_Intergral | PID_Integral_Limit | PID_Derivative_On_Measurement,
                         .IntegralLimit = 2500,
-                        .MaxOut = 30,
+                        .MaxOut = 20,
                     },
                 },
                 .controller_setting_init_config = {
@@ -163,8 +163,8 @@ Robot_Config_s *HeroConfigInit(void)
 
         .shoot_param = {
             //英雄双发射机构
-            .friction_motor_id[MOTOR_LF] = 3,
-            .friction_motor_id[MOTOR_RF] = 5,
+            .friction_motor_id[MOTOR_LF] = 2,
+            .friction_motor_id[MOTOR_RF] = 3,
             // .friction_motor_id[MOTOR_LB] = 1,
             // .friction_motor_id[MOTOR_RB] = 4,
 
@@ -175,15 +175,15 @@ Robot_Config_s *HeroConfigInit(void)
                 },
                 .controller_param_init_config = {
                     .speed_PID = {
-                        .Kp = 15.0, 
-                        .Ki = 1.0, 
+                        .Kp = 20.0, 
+                        .Ki = 0.0, 
                         .Kd = 0.0,
                         .Improve = PID_Integral_Limit,
                         .IntegralLimit = 10000,
                         .MaxOut = 15000,
                     },
                     .current_PID = {
-                        .Kp = 0.4, 
+                        .Kp = 1.0, 
                         .Ki = 0.0, 
                         .Kd = 0.0,
                         .Improve = PID_Integral_Limit,
@@ -204,7 +204,7 @@ Robot_Config_s *HeroConfigInit(void)
             .loader_motor_config = {
                 .can_init_config = {
                     .can_handle = &hcan2,
-                    .tx_id = 6,
+                    .tx_id = 1,
                 },
                 .controller_param_init_config = {
                     .angle_PID = {

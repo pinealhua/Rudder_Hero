@@ -63,10 +63,10 @@ static float lb_x_coeff, lb_y_coeff;
 static float rb_x_coeff, rb_y_coeff;
 // static DRMotorInstance *drmotor;
 //舵轮中位
-#define LF_RUDDER_ECD 1783 
-#define RF_RUDDER_ECD 3006
-#define RB_RUDDER_ECD 7873
-#define LB_RUDDER_ECD 2300
+#define LF_RUDDER_ECD 3100 
+#define RF_RUDDER_ECD 1654
+#define RB_RUDDER_ECD 1170
+#define LB_RUDDER_ECD 195
 
 #ifndef GIMBAL_BOARD
 void ChassisInit()
@@ -122,19 +122,19 @@ void ChassisInit()
     motor_rb = DJIMotorInit(&chassis_config->chassis_motor_config);
 
     //舵轮电机初始化
-    chassis_config->rudder_motor_config.can_init_config.tx_id = chassis_config->chassis_motor_id[MOTOR_UP_LF];
+    chassis_config->rudder_motor_config.can_init_config.tx_id = chassis_config->chassis_motor_id[MOTOR_UP_RF];
     chassis_config->rudder_motor_config.controller_setting_init_config.motor_reverse_flag = MOTOR_DIRECTION_NORMAL;
     rudder_rf = DJIMotorInit(&chassis_config->rudder_motor_config);     
 
     chassis_config->rudder_motor_config.can_init_config.tx_id = chassis_config->chassis_motor_id[MOTOR_UP_LF];
-    chassis_config->rudder_motor_config.controller_setting_init_config.motor_reverse_flag = MOTOR_DIRECTION_NORMAL;
+    chassis_config->rudder_motor_config.controller_setting_init_config.motor_reverse_flag = MOTOR_DIRECTION_REVERSE;
     rudder_lf = DJIMotorInit(&chassis_config->rudder_motor_config);
 
-    chassis_config->rudder_motor_config.can_init_config.tx_id = chassis_config->chassis_motor_id[MOTOR_UP_LF]; 
-    chassis_config->rudder_motor_config.controller_setting_init_config.motor_reverse_flag = MOTOR_DIRECTION_NORMAL;
+    chassis_config->rudder_motor_config.can_init_config.tx_id = chassis_config->chassis_motor_id[MOTOR_UP_LB]; 
+    chassis_config->rudder_motor_config.controller_setting_init_config.motor_reverse_flag = MOTOR_DIRECTION_REVERSE;
     rudder_lb = DJIMotorInit(&chassis_config->rudder_motor_config);
 
-    chassis_config->rudder_motor_config.can_init_config.tx_id = chassis_config->chassis_motor_id[MOTOR_UP_LF];     
+    chassis_config->rudder_motor_config.can_init_config.tx_id = chassis_config->chassis_motor_id[MOTOR_UP_RB];     
     chassis_config->rudder_motor_config.controller_setting_init_config.motor_reverse_flag = MOTOR_DIRECTION_NORMAL;
     rudder_rb = DJIMotorInit(&chassis_config->rudder_motor_config);
 
@@ -199,20 +199,20 @@ static void MecanumCalculate()
         break;
     case STEER_WHEEL:
         // 舵轮解算逆运动学模型  需要分解到轮向电机和舵向电机
-    float vx_lf = chassis_vx + chassis_cmd_recv.wz * lf_x_coeff;//解算x方向分速度
-    float vy_lf = chassis_vy + chassis_cmd_recv.wz * lf_y_coeff;//解算y方向分速度
+    float vx_lf = chassis_cmd_recv.vx + chassis_cmd_recv.wz * lf_x_coeff;//解算x方向分速度
+    float vy_lf = chassis_cmd_recv.vy + chassis_cmd_recv.wz * lf_y_coeff;//解算y方向分速度
     vt_lf = sqrtf( vx_lf*vx_lf + vy_lf*vy_lf ) ;//解算合速度
     theta_lf = atan2f( vy_lf , vx_lf )  ; //解算弧度
     theta_lf_deg = (theta_lf * 180.0f / PI + LF_RUDDER_ECD * ECD_ANGLE_COEF_DJI);//弧度转化为角度
-    
+    //有可能是这个电机有问题，需要更换
     float vx_rf = chassis_vx + chassis_cmd_recv.wz  * rf_x_coeff;
     float vy_rf = chassis_vy + chassis_cmd_recv.wz  * rf_y_coeff;
     vt_rf = sqrtf( vx_rf*vx_rf + vy_rf*vy_rf ) ;
     theta_rf =  atan2f( vy_rf , vx_rf ) ;
     theta_rf_deg =  (theta_rf * 180.0f / PI + RF_RUDDER_ECD * ECD_ANGLE_COEF_DJI);
    
-    float vx_lb = chassis_vx + chassis_cmd_recv.wz  * lb_x_coeff;
-    float vy_lb = chassis_vy + chassis_cmd_recv.wz  * lb_y_coeff;
+    float vx_lb = chassis_cmd_recv.vx + chassis_cmd_recv.wz  * lb_x_coeff;
+    float vy_lb = chassis_cmd_recv.vy + chassis_cmd_recv.wz  * lb_y_coeff;
     vt_lb = sqrtf( vx_lb*vx_lb + vy_lb*vy_lb ) ;
     theta_lb = atan2f( vy_lb , vx_lb ) ;
     theta_lb_deg = theta_lb * 180.0f / PI + LB_RUDDER_ECD * ECD_ANGLE_COEF_DJI;
@@ -428,8 +428,7 @@ void ChassisTask()
     {
     case CHASSIS_NO_FOLLOW: // 底盘不旋转,但维持全向机动,一般用于调整云台姿态
         chassis_cmd_recv.wz = chassis_cmd_recv.wz / rpm_2_wheel_vector;
-     //chassis_cmd_recv.vx=3000;
-     //chassis_cmd_recv.vy=3000;
+
         break;     
     case CHASSIS_FOLLOW_GIMBAL_YAW: // 跟随云台,不单独设置pid,以误差角度平方为速度输出
         if (chassis_config->chassis_follow_gimbal_flag)
@@ -456,7 +455,7 @@ void ChassisTask()
     MecanumCalculate();
 
     // 根据裁判系统的反馈数据和电容数据对输出限幅并设定闭环参考值
-    LimitChassisOutput();
+    //LimitChassisOutput();
 
     // 根据电机的反馈速度和IMU(如果有)计算真实速度
     //EstimateSpeed();

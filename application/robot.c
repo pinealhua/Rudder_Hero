@@ -34,7 +34,7 @@ void RobotInit()
     GimbalInit();
     ShootInit();
 #endif
-
+ 
 #if defined(ONE_BOARD) || defined(CHASSIS_BOARD)
     ChassisInit();
 #endif

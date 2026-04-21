@@ -31,12 +31,12 @@ void ShootInit()
 
     // 左前摩擦轮
     shoot_config->friction_motor_config.can_init_config.tx_id = shoot_config->friction_motor_id[MOTOR_LF];
-    shoot_config->friction_motor_config.controller_setting_init_config.motor_reverse_flag = shoot_config->friction_motor_reverse_flag[MOTOR_LF];       
+    shoot_config->friction_motor_config.controller_setting_init_config.motor_reverse_flag = MOTOR_DIRECTION_NORMAL;       
     friction_lf = DJIMotorInit(&shoot_config->friction_motor_config);
 
     // 右前摩擦轮
     shoot_config->friction_motor_config.can_init_config.tx_id = shoot_config->friction_motor_id[MOTOR_RF];
-    shoot_config->friction_motor_config.controller_setting_init_config.motor_reverse_flag = shoot_config->friction_motor_reverse_flag[MOTOR_RF];   
+    shoot_config->friction_motor_config.controller_setting_init_config.motor_reverse_flag = MOTOR_DIRECTION_REVERSE;   
     friction_rf = DJIMotorInit(&shoot_config->friction_motor_config);
 
     switch (shoot_config->shoot_type)
